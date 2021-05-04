@@ -32,7 +32,8 @@
     <TextView
         android:id="@+id/forecast_item_heure"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/forecast_item_icon"/>
     <ImageView
         android:id="@+id/forecast_item_icon"
         android:layout_width="wrap_content"

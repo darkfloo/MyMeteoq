@@ -21,7 +21,7 @@ class ItemWeatherHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerV
     private var mTemperature:TextView? = null
     private var mIcon: ImageView? = null
     private var mStar: ImageView ?= null
-    private var mFrag: Fragment ?=null
+    private var mFrag: HomeFragment ?=null
     private var mDelete: ImageView ?=null
     init{
         mTitle = itemView.findViewById(R.id.weather_item_title)
@@ -35,7 +35,7 @@ class ItemWeatherHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerV
        this.mTemperature?.text =  we.main?.temp.toString()
         this.mCountry?.text  = we.sys?.country
         this.mTitle?.text = we.name
-        mFrag=frag;
+        mFrag=frag as HomeFragment
         mDelete?.setOnClickListener{
             callBackDelete()
         }
@@ -45,6 +45,7 @@ class ItemWeatherHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerV
         mIcon?.setOnClickListener{
             navigate()
         }
+        checkFav()
         when(we.weather[0].icon){
             "01d" -> mIcon?.setImageResource(R.drawable.sun)
             "02d" -> mIcon?.setImageResource(R.drawable.sun_cloud)
@@ -71,13 +72,22 @@ class ItemWeatherHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerV
         HomeFragment.listCityResp.removeAt(adapterPosition)
         HomeFragment.testrecyclerView.adapter?.notifyItemRemoved(adapterPosition)
     }
+    fun checkFav(){
+        if(HomeFragment.listCityFav.contains(mTitle?.text.toString())){
+            mStar?.setImageResource(android.R.drawable.star_on)
+        }else{
+            mStar?.setImageResource(android.R.drawable.star_off)
+        }
+    }
     fun callBackFav(){
         if(HomeFragment.listCityFav.contains(mTitle?.text.toString())){
             HomeFragment.listCityFav.remove(mTitle?.text.toString())
             mStar?.setImageResource(android.R.drawable.star_off)
+            mFrag?.updateList()
         }else{
            HomeFragment.listCityFav.add(mTitle?.text.toString())
            mStar?.setImageResource(android.R.drawable.star_on)
+            mFrag?.updateList()
         }
 
     }

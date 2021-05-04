@@ -1,5 +1,6 @@
 package com.example.mymeteo.ui.home
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -92,13 +93,18 @@ class HomeFragment : Fragment() {
         fab.setOnClickListener{
             addLocationListner(view)
         }
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        val testset = sharedPref.getStringSet("a",null)!!
+        listCityFav=testset.toMutableList()
         mRecyclerView = view.findViewById(R.id.weather_recycle_view)
+        listCityFav.forEach{
+            addData(mView,it)
+        }
         testrecyclerView=mRecyclerView
         mRecyclerView.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = ItemWeatherAdapter(listCityResp,this@HomeFragment)
         }
-        if(listCityResp.size==0)getCurrentData(view)
     }
     fun notifyInserted(view :View){
         mRecyclerView = view.findViewById(R.id.weather_recycle_view)
@@ -108,6 +114,13 @@ class HomeFragment : Fragment() {
     fun addLocationListner(view: View){
         val txtSerach: EditText = view.findViewById(R.id.text_search_home)
         addData(view,txtSerach.text.toString())
+    }
+    fun updateList(){
+       val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)  ?: return
+        with(sharedPref.edit()){
+            putStringSet("a", listCityFav.toSet())
+            apply()
+        }
     }
     companion object  {
         var BaseUrl = "http://api.openweathermap.org/"

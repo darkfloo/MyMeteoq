@@ -18,7 +18,7 @@ class ItemWeatherForecastHolder(inflater: LayoutInflater, parent: ViewGroup): Re
     private var mPressure : TextView?= null
     private var mIcon : ImageView?= null
     private var mCompass : ImageView? = null
-    private var mHeure: ImageView?= null
+    private var mHeure: TextView?= null
     init{
         mTemp = itemView.findViewById(R.id.forecast_item_temp)
         mTempFelt = itemView.findViewById(R.id.forecast_item_tempfelt)
@@ -31,6 +31,7 @@ class ItemWeatherForecastHolder(inflater: LayoutInflater, parent: ViewGroup): Re
         this.mTemp?.text = fe.main?.temp.toString()
         this.mTempFelt?.text = fe.main?.feels_like.toString()
         this.mPressure?.text = fe.main?.pressure.toString()
+        this.mHeure?.text = fe.dt_txt
         when(fe.weather[0].icon){
             "01d" -> mIcon?.setImageResource(R.drawable.sun)
             "02d" -> mIcon?.setImageResource(R.drawable.sun_cloud)
