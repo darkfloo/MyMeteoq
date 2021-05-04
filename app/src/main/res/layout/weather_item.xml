@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_gravity="center_horizontal"
+    android:padding="16dp"
+    android:background="@drawable/background_items"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:id="@+id/layout_text_item_weather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentLeft="true"
+        android:layout_gravity="center_horizontal"
+        android:padding="16dp">
+        <TextView
+            android:id="@+id/weather_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/weather_item_country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/weather_item_temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/weather_item_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/weather_item_delete"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/app_name"
+        android:padding="5dp"
+        android:scaleX="3"
+        android:scaleY="3"
+        app:srcCompat="@drawable/sun" />
+    <ImageView
+        android:id="@+id/weather_item_fav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="end|center"
+        android:padding="5dp"
+        android:contentDescription="@string/app_name"
+        app:srcCompat="@android:drawable/star_off"/>
+
+    <ImageView
+        android:id="@+id/weather_item_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/weather_item_fav"
+        android:contentDescription="@string/app_name"
+        android:padding="10dp"
+        app:srcCompat="@android:drawable/ic_delete" />
+
+</RelativeLayout>
