@@ -6,10 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.ListAdapter
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
@@ -74,6 +71,7 @@ class HomeFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
+                Toast.makeText(view.context,"Pas de ville trouvé",Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -94,11 +92,11 @@ class HomeFragment : Fragment() {
             addLocationListner(view)
         }
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-        val testset = sharedPref.getStringSet("a",null)!!
-        listCityFav=testset.toMutableList()
+        val testset = sharedPref.getStringSet("a",null)
+        if(testset!=null)listCityFav=testset.toMutableList()
         mRecyclerView = view.findViewById(R.id.weather_recycle_view)
         listCityFav.forEach{
-            addData(mView,it)
+            if(listCityResp.size==0)addData(mView,it)
         }
         testrecyclerView=mRecyclerView
         mRecyclerView.apply {
