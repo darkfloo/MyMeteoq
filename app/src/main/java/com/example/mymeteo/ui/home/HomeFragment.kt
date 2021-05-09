@@ -127,9 +127,7 @@ class HomeFragment : Fragment() {
         var Metric = "metric"
         var listCityResp : MutableList<WeatherResponse> = mutableListOf()
         lateinit var  testrecyclerView: RecyclerView
-        var listCityDisplayed : MutableList<String> = mutableListOf()
         var listCityFav : MutableList<String> = mutableListOf()
-        var listForecastResponse: MutableList<ForecastResponse> = mutableListOf()
         var selectedElement : String?= null
     }
 }
