@@ -3,6 +3,8 @@ package com.example.mymeteo
 import android.opengl.Visibility
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
@@ -59,6 +61,16 @@ class MainActivity : AppCompatActivity() {
     }
     public fun returnButton(): FloatingActionButton{
         return findViewById(R.id.fab)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId){
+            R.id.action_settings->{
+                Toast.makeText(applicationContext,"Crédits: https://github.com/jackd248/weather-iconic pour les icones et https://www.androidmads.info/2019/01/how-to-use-retrofit-2-with-android.html pour l'api",Toast.LENGTH_LONG).show()
+                true
+            }else -> return super.onOptionsItemSelected(item)
+
+        }
     }
 
 }
